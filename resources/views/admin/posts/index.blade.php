@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumbs')
-
+    {{ Breadcrumbs::render('posts') }}
 @endsection
 
 @section('content')
@@ -15,33 +15,61 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">DataTable with default features</h3>
+                        <form action="" method="GET" class="form-inline form-row">
+                            <div class="col">
+                               <div class="input-group mx-1">
+                                  <label class="font-weight-bold mr-2">
+                                      Status
+                                  </label>
+                                  <select name="status" class="custom-select">
+                                    {{-- @foreach ($statuses as $value => $label)
+                                      <option value="{{ $value }}"
+                                      {{ $statusSelected == $value ? 'selected' : null }}>
+                                          {{ $label }}
+                                      </option>
+                                    @endforeach --}}
+                                  </select>
+                                  <div class="input-group-append">
+                                     <button class="btn btn-primary" type="submit">
+                                         Cari
+                                     </button>
+                                  </div>
+                               </div>
+                            </div>
+                            <div class="col">
+                               <div class="input-group mx-1">
+                                  <input name="keyword" type="search" value="{{ request()->get('keyword') }}" class="form-control"
+                                  placeholder="Cari">
+                                  <div class="input-group-append">
+                                     <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-search"></i>
+                                     </button>
+                                  </div>
+                               </div>
+                            </div>
+                         </form>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <div class="card-body">
-                            <table id="example2" class="table table-hover">
+                        @forelse ($posts as $post)
+                        <table id="example2" class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Rendering engine</th>
-                                    <th>Browser</th>
-                                    <th>Platform(s)</th>
-                                    <th>Engine version</th>
-                                    <th>CSS grade</th>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Created-at</th>
+                                    <th>Create By</th>
                                     <th>Option</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>Trident</td>
-                                    <td>Internet
-                                    Explorer 4.0
-                                    </td>
-                                    <td>Win 95+</td>
-                                    <td> 4</td>
-                                    <td>X</td>
+                                    <td>{{ $post->title }}</td>
+                                    <td>{{ $post->status }}</td>
+                                    <td>{{ $post->created_at }}</td>
+                                    <td>Manyan</td>
                                     <td>
                                         <form action="" method="post">
                                             <a href="" class="btn btn-danger btn-sm">Delete</a>
@@ -52,7 +80,13 @@
                                 </tr>
                             </tbody>
                             </table>
+                        @empty
+                        <div class="text-center">
+                            <p>
+                                <strong>Data Post Belum Ada</strong>
+                            </p>
                         </div>
+                        @endforelse
                     </div>
                 </div>
              </div>

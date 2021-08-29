@@ -8,31 +8,82 @@ use Diglactic\Breadcrumbs\Breadcrumbs;
 //  with `$trail`. This is nice for IDE type checking and completion.
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
-// Tags -> Home
-Breadcrumbs::for('tags', function (BreadcrumbTrail $trail) {
+
+
+
+// Dashboard
+Breadcrumbs::for('dashboard', function ($trail){
+    $trail->push('Dashboard', route('dashboard.index'));
+});
+
+// Dashboard -> Home
+Breadcrumbs::for('dashboard_home', function($trail){
+    $trail->parent('dashboard');
+    $trail->push('Home', '#');
+});
+
+// Dashboard -> Categories
+Breadcrumbs::for('categories', function($trail){
+    $trail->parent('dashboard');
+    $trail->push('Categories', route('category.index'));
+});
+
+// Dashboard -> Categories -> Add
+Breadcrumbs::for('add_category', function($trail){
+    $trail->parent('categories');
+    $trail->push('Add', route('category.create'));
+});
+
+// Dashboard ->categories -> Edit
+Breadcrumbs::for('edit_category', function($trail, $category){
+    $trail->parent('categories');
+    $trail->push('Edit', route('category.edit',['category' => $category]));
+});
+
+// Dashboard ->categories -> Edit -> [title]
+Breadcrumbs::for('edit_category_title', function($trail, $category){
+    $trail->parent('edit_category', $category);
+    $trail->push($category->title, route('category.edit',['category' => $category]));
+});
+
+// Dashboard ->categories -> Detail
+Breadcrumbs::for('detail_category', function($trail, $category){
+    $trail->parent('categories');
+    $trail->push('Detail', route('category.show',['category' => $category]));
+});
+
+// Dashboard ->categories -> Detail -> [title]
+Breadcrumbs::for('detail_category_title', function($trail, $category){
+    $trail->parent('detail_category', $category);
+    $trail->push($category->title, route('category.show',['category' => $category]));
+});
+
+// Dashboard -> Tags
+Breadcrumbs::for('tags', function($trail){
+    $trail->parent('dashboard');
     $trail->push('Tags', route('tags.index'));
 });
-// Tags -> Add
-Breadcrumbs::for('tags_add', function (BreadcrumbTrail $trail) {
+// Dashboard -> Tags -> Add
+Breadcrumbs::for('add_tag', function($trail){
     $trail->parent('tags');
     $trail->push('Add', route('tags.create'));
 });
-// Tags -> Edit
-Breadcrumbs::for('tags_edit', function (BreadcrumbTrail $trail, $tag) {
+
+// Dashboard -> Tags -> Edit [title]
+Breadcrumbs::for('edit_tag', function($trail, $tag){
     $trail->parent('tags');
-    $trail->push('Edit', route('tags.edit', $tag));
-    $trail->push($tag->title, route('tags.edit', $tag));
+    $trail->push('Edit', route('tags.edit', ['tag' => $tag]));
+    $trail->push($tag->title, route('tags.edit', ['tag' => $tag]));
 });
 
-// Posts -> Home
-Breadcrumbs::for('posts', function (BreadcrumbTrail $trail) {
+// Dashboard -> Posts
+Breadcrumbs::for('posts', function($trail){
+    $trail->parent('dashboard');
     $trail->push('Posts', route('posts.index'));
 });
 
-// Posts -> Add
-Breadcrumbs::for('posts_add', function (BreadcrumbTrail $trail) {
+// Dashboard -> Posts -> Add
+Breadcrumbs::for('add_post', function($trail){
     $trail->parent('posts');
     $trail->push('Add', route('posts.create'));
 });
-
-

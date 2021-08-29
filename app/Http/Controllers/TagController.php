@@ -6,18 +6,24 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use Illuminate\Support\Facades\Validator;
 class TagController extends Controller
 {
+
+    private $perPage = 10;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tags = Tag::all();
-        return view('admin.tags.index', compact('tags'));
+        $tags = $request->get('keyword')
+        ? Tag::search($request->keyword)->paginate($this->perPage)
+        : Tag::paginate($this->perPage);
+        return view('admin.tags.index',[
+            'tags' => $tags->appends(['keyword' => $request->keyword])
+        ]);
     }
     public function select(Request $request)
     {
@@ -48,19 +54,23 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'title'      => ['required','max:25', 'unique:tags'],
-        ]);
+        Validator::make(
+            $request->all(),
+            [
+                'title'     => ['required','string','max:25'],
+                'slug'      => ['required','string','unique:tags,slug']
+            ],
+        )->validate();
 
         try {
             Tag::create([
                 'title'      => $request->title,
-                'slug'      => Str::slug($request->title)
+                'slug'       => Str::slug($request->title)
             ]);
             Alert::success('Tambah Tag', 'Berhasil');
             return redirect()->route('tags.index');
         } catch (\Throwable $th) {
-            Alert::error('Tambah Tag','Gagal',['error' => $th->getMessage()]);
+            Alert::error('Tambah Tag','Gagal' . $th->getMessage());
             return redirect()->back()->withInput($request->all());
         }
     }
@@ -84,6 +94,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
+
         return view('admin.tags.edit', compact('tag'));
     }
 
@@ -96,9 +107,13 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        $this->validate($request,[
-            'title'      => ['required','max:25', 'unique:tags'],
-        ]);
+        Validator::make(
+            $request->all(),
+            [
+                'title'     => ['required','string','max:25'],
+                'slug'      => ['required','string','unique:tags,slug,' . $tag->id]
+            ],
+        )->validate();
 
         try {
             $tag->update([
@@ -127,8 +142,8 @@ class TagController extends Controller
             Alert::success('Delete Tag', 'Berhasil');
             return redirect()->back();
         } catch (\Throwable $th) {
-            Alert::error('Delete Tag', 'Gagal', ['error' => $th->getMessage()]);
-            return redirect()->back();
+            Alert::error('Delete Tag', 'Gagal' . $th->getMessage());
         }
+        return redirect()->back();
     }
 }

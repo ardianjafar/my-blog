@@ -10,63 +10,88 @@
 
 @section('content')
 <div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-              <div class="card">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
                 <div class="card-header">
-                  <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                      <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                      <div class="input-group-append">
-                        <button type="submit" class="btn btn-default">
-                          <i class="fas fa-search"></i>
-                        </button>
+                  <div class="row">
+                      <div class="col-md-6">
+                         <form action="{{ route('category.index') }}" method="GET">
+                            <div class="input-group">
+                               <input name="keyword" type="search" class="form-control"
+                               placeholder="Masukkan Pencarian"
+                               value="{{ request()->get('keyword') }}">
+                               <div class="input-group-append">
+                                  <button class="btn btn-primary" type="submit">
+                                     <i class="fas fa-search"></i>
+                                  </button>
+                               </div>
+                            </div>
+                         </form>
                       </div>
-                    </div>
-                  </div>
+                      <div class="col-md-6">
+                          {{-- @can('category_create') --}}
+                              <a href="{{ route('category.create') }}" class="btn btn-primary float-right" role="button">Create Category
+                                  <i class="fas fa-plus-square"></i>
+                              </a>
+                          {{-- @endcan --}}
+                      </div>
+                   </div>
                 </div>
-                <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
-                  <table class="table table-hover text-nowrap">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Kategori</th>
-                        <th>Deskripsi</th>
-                        <th>Dibuat pada</th>
-                        <th>Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($categories as $item)
-                        <tr>
-                            <td>1</td>
-                            <td>{{ $item->title }}</td>
-                            <td>{{ $item->description }}</td>
-                            <td>{{ $item->created_at->diffForHumans() }}</td>
-                            <td>
+                <div class="card-body">
+                   <ul class="list-group list-group-flush">
+                      <!-- list category -->
+                      @if (count($categories))
+                          @include('admin.categories.category-list',[
+                              'categories' => $categories,
+                              'count'     => 0
+                          ])
+                      @else
+                          <p>
 
-                                <form class="d-inline" action="{{ route('category.destroy',$item->id) }}" method="POST">
-                                    <a href="{{ route('category.show',$item->id , '/show') }}" class="btn btn-sm btn-info">Show</a>
-                                    <a href="{{ route('category.edit',$item->id , '/edit') }}" class="btn btn-sm btn-primary">Edit</a>
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm btn-sm" type="submit">
-                                        Delete
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                  </table>
+                                  @if (request()->get('keyword'))
+                                  <strong><i>Pencarian {{ request()->get('keyword') }}</i></strong> tidak ada dalam data
+                                  @else
+                                      <strong>Data tidak ada</strong>
+                                  @endif
+
+                          </p>
+                      @endif
+                   </ul>
                 </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
-            </div>
-          </div>
+                @if ($categories->hasPages())
+                  <div class="card-footer">
+                      {{ $categories->links('vendor.pagination.bootstrap-4') }}
+                  </div>
+                @endif
+             </div>
+        </div>
     </div>
 </div>
 @endsection
+
+@push('javascript-internal')
+ <script>
+     $(document).ready(function () {
+        // -> event delete category
+        $("form[role='alert']").submit(function(event) {
+            event.preventDefault();
+            Swal.fire({
+            title: "Hapus Kategori",
+            text: "Yakin anda mau hapus kategori ini ?...",
+            icon: 'warning',
+            allowOutsideClick: false,
+            showCancelButton: true,
+            cancelButtonText: "Tidakk",
+            reverseButtons: true,
+            confirmButtonText: "Iyaaa",
+            }).then((result) => {
+            if (result.isConfirmed) {
+                // todo: process of deleting categories
+                event.target.submit();
+            }
+            });
+        });
+     });
+ </script>
+@endpush

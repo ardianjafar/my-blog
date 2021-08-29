@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumbs')
-   Detail Category
+   {{ Breadcrumbs::render('detail_category_title', $category) }}
 @endsection
 
 @section('content')
@@ -14,9 +14,9 @@
         <div class="card">
             <div class="card-body">
                 {{-- {{ dd(asset($categories->thumbnail)) }} --}}
-                @if (file_exists(public_path($categories->thumbnail)))
+                @if (file_exists(public_path($category->thumbnail)))
                 <div class="">
-                    <img src="{{ asset($categories->thumbnail) }}" alt="{{ $categories->title }}" style="width: 250px; height:100%;">
+                    <img src="{{ asset($category->thumbnail) }}" alt="{{ $category->title }}" >
                 </div>
                 @else
                     <!-- thumbnail:false -->
@@ -25,21 +25,21 @@
                         <rect width="100%" height="100%" fill="#868e96"></rect>
                         <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#dee2e6" dy=".3em"
                             font-size="24">
-                            {{ $categories->title }}
+                            {{ $category->title }}
                         </text>
                     </svg>
                 @endif
                 <!-- title -->
 
                 <h2 class="my-1">
-                    {{ $categories->title }}
+                    {{ $category->title }}
                 </h2>
                 <!-- description -->
                 <p class="text-justify">
-                    {{ $categories->description }}
+                    {{ $category->description }}
                 </p>
                 <p class="text-justify">
-                    {{ $categories->created_at->diffForHumans() }}
+                    {{ $category->created_at->diffForHumans() }}
                 </p>
                 <div class="d-flex justify-content-end">
                     <a href="{{ route('category.index') }}" class="btn btn-primary mx-1" role="button">

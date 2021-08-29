@@ -25,7 +25,7 @@ return [
     |
     */
 
-    'alwaysLoadJS' => env('SWEET_ALERT_ALWAYS_LOAD_JS', false),
+    'alwaysLoadJS' => env('SWEET_ALERT_ALWAYS_LOAD_JS', true),
 
     /*
     |--------------------------------------------------------------------------

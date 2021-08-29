@@ -13,21 +13,24 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <a href="{{ route('tags.create') }}" class="btn btn-info btn-sm">Add Tags</a>
+                  <a href="{{ route('tags.create') }}" class="btn btn-info btn-sm">Tambah Tag Baru</a>
                   <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                      <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                      <div class="input-group-append">
-                        <button type="submit" class="btn btn-default">
-                          <i class="fas fa-search"></i>
-                        </button>
-                      </div>
-                    </div>
+                    <form action="{{ route('tags.index') }}" method="get">
+                        <div class="input-group input-group-sm" style="width: 380px;">
+                        <input type="search" value="{{ request()->get('keyword') }}" name="keyword" class="form-control float-right" placeholder="Search">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default">
+                            <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        </div>
+                    </form>
                   </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
                   <table class="table table-hover text-nowrap">
+                    @if (count($tags))
                     <thead>
                       <tr>
                         <th>ID</th>
@@ -46,7 +49,7 @@
                             <td>{{ $item->created_at->diffForHumans() }}</td>
                             <td>
                                 <a href="{{ route('tags.edit',$item->id , '/edit') }}" class="btn btn-sm btn-primary">Edit</a>
-                                <form class="d-inline" action="{{ route('tags.destroy',$item->id) }}" method="POST">
+                                <form class="d-inline" action="{{ route('tags.destroy',$item->id) }}" method="POST" role="alert">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm btn-sm" type="submit">
@@ -56,8 +59,24 @@
                             </td>
                         </tr>
                         @endforeach
+                        @else
+                        <div class="p-3">
+                            <p>
+                                @if (request()->get('keyword'))
+                                   <strong>Pencarian {{ request()->get('keyword') }} tidak di temukan</strong>
+                                @else
+                                <strong>Data Tag Belum Ada</strong>
+                                @endif
+                            </p>
+                        </div>
+                        @endif
                     </tbody>
                   </table>
+                  @if ($tags->hasPages())
+                    <div class="card-footer">
+                        {{ $tags->links('vendor.pagination.bootstrap-4') }}
+                    </div>
+                  @endif
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -67,3 +86,27 @@
     </div>
 </div>
 @endsection
+
+@push('javascript-internal')
+    <script>
+        $(document).ready(function(event) {
+            $("form[role='alert']").submit(function (event) {
+            event.preventDefault();
+            Swal.fire({
+            title: "Hapus Tag",
+            text: "Yakin anda mau hapus kategori ini ?...",
+            icon: 'warning',
+            allowOutsideClick: false,
+            showCancelButton: true,
+            cancelButtonText: "Tidakkk",
+            reverseButtons: true,
+            confirmButtonText: "Iyaaa",
+            }).then((result) => {
+            if (result.isConfirmed) {
+                    event.target.submit();
+               }
+             });
+           });
+        });
+    </script>
+@endpush

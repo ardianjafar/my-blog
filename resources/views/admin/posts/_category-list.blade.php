@@ -10,7 +10,7 @@
            {{ $category->title }}
        </label>
        @if ($category->descendants)
-            @include('posts._category-list',[
+            @include('admin.posts._category-list',[
                 'categories' => $category->descendants,
                 'categoryChecked' => $categoryChecked
             ])

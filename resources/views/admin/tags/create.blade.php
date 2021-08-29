@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumbs')
-    {{ Breadcrumbs::render('tags_add') }}
+    {{ Breadcrumbs::render('add_tag') }}
 @endsection
 
 @section('content')
@@ -19,20 +19,60 @@
         @csrf
         <div class="card-body">
             <div class="form-group">
-                <label for="title">Tags</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" placeholder="Enter tags">
-            </div>
+                <label for="input_tag_title" class="font-weight-bold">
+                   Title
+                </label>
+                <input id="input_tag_title" value="{{ old('title') }}" name="title" type="text"
+                   class="form-control @error('title') is-invalid @enderror"
+                   placeholder="Masukkan title" />
+                   @error('title')
+                      <span class="invalid-feedback">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                   @enderror
+             </div>
             @error('title')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
-            {{-- <div class="form-group">
-                <label for="slug">Slug</label>
-                <input type="text" class="form-control" name="slug" id="slug" placeholder="Slug Auto Generate" readonly>
-            </div> --}}
+            <div class="form-group">
+                <label for="input_tag_slug" class="font-weight-bold">
+                   Slug
+                </label>
+                <input id="input_tag_slug" value="{{ old('slug') }}" name="slug" type="text"
+                   class="form-control @error('slug') is-invalid @enderror"
+                   placeholder="Auto Generate" readonly />
+                   @error('slug')
+                      <span class="invalid-feedback">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                   @enderror
+             </div>
         </div>
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary btn-sm">Create</button>
+            <a href="{{ route('tags.index') }}" class="btn btn-warning btn-sm">Kembali</a>
+            <button type="submit" class="btn btn-primary btn-sm">Buat</button>
         </div>
     </form>
   </div>
 @endsection
+
+@push('javascript-internal')
+    <script>
+        $(document).ready(function() {
+            const generateSlug = (value) => {
+            return value.trim()
+                .toLowerCase()
+                .replace(/[^a-z\d-]/gi, '-')
+                .replace(/-+/g, '-').replace(/^-|-$/g, "")
+            }
+
+        /*
+            Event -> slug
+        */
+        $("#input_tag_title").change(function(event) {
+            $("#input_tag_slug").val(generateSlug(event.target.value))
+        });
+    });
+
+    </script>
+@endpush

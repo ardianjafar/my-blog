@@ -12,9 +12,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/tags/select', [TagController::class,'select'])->name('tags.select');
     Route::resource('/tags', TagController::class);
     Route::resource('/posts', PostController::class);
+    Route::get('/category/select',[CategoryController::class,'select'])->name('category.select');
     Route::resource('/category', CategoryController::class);
     // Filemanager
-    Route::group(['prefix' => 'laravel-filemanager'], function () {
+    Route::group(['prefix' => 'filemanager'], function () {
         Route::get('/index', [FileManagerController::class,'index'])->name('filemanager.index');
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });

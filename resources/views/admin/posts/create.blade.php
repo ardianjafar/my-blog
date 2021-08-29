@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumbs')
-    {{ Breadcrumbs::render('posts_add') }}
+    {{ Breadcrumbs::render('add_post') }}
 @endsection
 
 @section('content')
@@ -101,7 +101,7 @@
                          </label>
                          <div class="form-control @error('category') is-invalid @enderror overflow-auto" style="height: 886px">
                             <!-- List category -->
-                            @include('admin.posts.post._category-list',[
+                            @include('admin.posts._category-list',[
                                 'cateories' => $categories,
                                 'categoryChecked'   => old('category')
                             ])

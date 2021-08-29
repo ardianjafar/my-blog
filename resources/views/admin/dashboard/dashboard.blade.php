@@ -34,26 +34,42 @@
                         <th>Tags</th>
                         <th>Slug</th>
                         <th>Created at</th>
+                        <th>Views</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Coba</td>
-                            <td>Coba</td>
-                            <td>Coba</td>
-                            <td>
-                                {{-- <a href="{{ route('tags.edit',$item->id , '/edit') }}" class="btn btn-sm btn-primary">Edit</a>
-                                <form class="d-inline" action="{{ route('tags.destroy',$item->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm btn-sm" type="submit">
-                                        Delete
-                                    </button>
-                                </form> --}}
-                            </td>
-                        </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>Trident</td>
+                        <td>windows-11
+                        </td>
+                        <td>Win 95+</td>
+                        <td> 4</td>
+                        <td>
+                            <form action="" method="post">
+                                <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                <a href="" class="btn btn-info btn-sm">Detail</a>
+                                <a href="" class="btn btn-primary btn-sm">Edit</a>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Trident</td>
+                        <td>Internet
+                        Explorer 4.0
+                        </td>
+                        <td>Win 2001</td>
+                        <td> 8</td>
+                        <td>
+                            <form action="" method="post">
+                                <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                <a href="" class="btn btn-info btn-sm">Detail</a>
+                                <a href="" class="btn btn-primary btn-sm">Edit</a>
+                            </form>
+                        </td>
+                    </tr>
                     </tbody>
                   </table>
                 </div>
