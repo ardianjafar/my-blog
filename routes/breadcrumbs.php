@@ -87,3 +87,54 @@ Breadcrumbs::for('add_post', function($trail){
     $trail->parent('posts');
     $trail->push('Add', route('posts.create'));
 });
+// Dashboard -> Posts -> Detail -> [title]
+Breadcrumbs::for('detail_post', function($trail, $post){
+    $trail->parent('posts');
+    $trail->push('Detail', route('posts.show', ['post' => $post]));
+    $trail->push($post->title, route('posts.show', ['post' => $post]));
+});
+// Dashboard -> Posts -> Edit -> [title]
+Breadcrumbs::for('edit_post', function($trail, $post){
+    $trail->parent('posts');
+    $trail->push('Edit', route('posts.edit', ['post' => $post]));
+    $trail->push($post->title, route('posts.edit', ['post' => $post]));
+});
+
+// Dashboard -> FileManager
+Breadcrumbs::for('filemanager', function($trail){
+    $trail->parent('dashboard');
+    $trail->push('File Manager', route('filemanager.index'));
+});
+
+// Dashboard -> Posts -> Roles
+Breadcrumbs::for('roles', function($trail){
+    $trail->parent('dashboard');
+    $trail->push('Roles', route('roles.index'));
+});
+// Dashboard -> Role -> Detail -> [name]
+Breadcrumbs::for('detail_role', function($trail, $role){
+    $trail->parent('roles');
+    $trail->push('Detail', route('roles.show', ['role' => $role]));
+    $trail->push($role->name, route('roles.show', ['role' => $role]));
+});
+// Dashboard -> Roles -> add
+Breadcrumbs::for('add_roles', function($trail){
+    $trail->parent('roles');
+    $trail->push('Add', route('roles.create'));
+});
+// Dashboard -> Role -> Edit -> [name]
+Breadcrumbs::for('edit_roles', function($trail, $role){
+    $trail->parent('roles');
+    $trail->push('Edit', route('roles.edit', ['role' => $role]));
+    $trail->push($role->name, route('roles.edit', ['role' => $role]));
+});
+// Dashboard -> users
+Breadcrumbs::for('users', function($trail){
+    $trail->parent('dashboard');
+    $trail->push('Users', route('users.index'));
+});
+// Dashboard -> Users -> add
+Breadcrumbs::for('add_user', function($trail){
+    $trail->parent('users');
+    $trail->push('Add', route('users.create'));
+});

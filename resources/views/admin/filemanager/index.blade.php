@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumbs')
-    This is Breadcrumbs
+    {{ Breadcrumbs::render('filemanager') }}
 @endsection
 
 @section('content')

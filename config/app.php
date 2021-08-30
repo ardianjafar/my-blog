@@ -164,7 +164,7 @@ return [
 
         // Sweet Alert
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
-
+        // Permission
         /*
          * Package Service Providers...
          */

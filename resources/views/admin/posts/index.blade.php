@@ -22,12 +22,12 @@
                                       Status
                                   </label>
                                   <select name="status" class="custom-select">
-                                    {{-- @foreach ($statuses as $value => $label)
+                                    @foreach ($statuses as $value => $label)
                                       <option value="{{ $value }}"
                                       {{ $statusSelected == $value ? 'selected' : null }}>
                                           {{ $label }}
                                       </option>
-                                    @endforeach --}}
+                                    @endforeach
                                   </select>
                                   <div class="input-group-append">
                                      <button class="btn btn-primary" type="submit">
@@ -51,7 +51,6 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        @forelse ($posts as $post)
                         <table id="example2" class="table table-hover">
                             <thead>
                                 <tr>
@@ -63,34 +62,74 @@
                                     <th>Option</th>
                                 </tr>
                             </thead>
+                            @forelse ($posts as $post)
                             <tbody>
                                 <tr>
                                     <td>1</td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->status }}</td>
-                                    <td>{{ $post->created_at }}</td>
+                                    <td>{{ $post->created_at->diffForHumans() }}</td>
                                     <td>Manyan</td>
                                     <td>
-                                        <form action="" method="post">
-                                            <a href="" class="btn btn-danger btn-sm">Delete</a>
-                                            <a href="" class="btn btn-info btn-sm">Detail</a>
-                                            <a href="" class="btn btn-primary btn-sm">Edit</a>
+                                        <form action="{{ route('posts.destroy', ['post' => $post]) }}" method="post" role="alert">
+                                            @csrf
+                                            @method('delete')
+                                            <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info btn-sm">Detail</a>
+                                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                Delete
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>
                             </tbody>
+                            @empty
+                            <div class="text-center">
+                                <p>
+
+                                        @if (request()->get('keyword'))
+                                            Data  pencarian <strong>{{ request()->get('keyword') }}</strong> belum ada dalam postingan
+                                        @else
+                                            <strong>Data Post Belum Ada</strong>
+                                        @endif
+
+                                </p>
+                            </div>
+                            @endforelse
                             </table>
-                        @empty
-                        <div class="text-center">
-                            <p>
-                                <strong>Data Post Belum Ada</strong>
-                            </p>
-                        </div>
-                        @endforelse
                     </div>
+                    @if ($posts->hasPages())
+                        <div class="card-footer">
+                            {{ $posts->links('vendor.pagination.bootstrap-4') }}
+                        </div>
+                    @endif
                 </div>
              </div>
         </div>
     </div>
 </section>
 @endsection
+
+@push('javascript-internal')
+    <script>
+        $(document).ready(function(event) {
+            $("form[role='alert']").submit(function (event) {
+            event.preventDefault();
+            Swal.fire({
+            title: "Hapus Tag",
+            text: "Yakin anda mau hapus kategori ini ?...",
+            icon: 'warning',
+            allowOutsideClick: false,
+            showCancelButton: true,
+            cancelButtonText: "Tidakkk",
+            reverseButtons: true,
+            confirmButtonText: "Iyaaa",
+            }).then((result) => {
+            if (result.isConfirmed) {
+                    event.target.submit();
+               }
+             });
+           });
+        });
+    </script>
+@endpush

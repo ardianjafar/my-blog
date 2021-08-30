@@ -104,7 +104,7 @@
           </li>
           <li class="nav-header">MANAGEMENT USERS</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('users.index') }}" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
                 Users
@@ -112,7 +112,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('roles.index') }}" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
                 Roles

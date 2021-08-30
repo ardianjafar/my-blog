@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{BlogController, CategoryController,PostController,TagController,DashboardController, FileManagerController};
+use App\Http\Controllers\{BlogController, CategoryController,PostController,TagController,DashboardController, FileManagerController, RoleController, UserController};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,5 +19,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
         Route::get('/index', [FileManagerController::class,'index'])->name('filemanager.index');
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });
+
+    // Roles
+    Route::resource('/roles', RoleController::class);
+    // Roles
+    Route::resource('/users', UserController::class);
 });
 
