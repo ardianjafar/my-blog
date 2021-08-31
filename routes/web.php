@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 Route::get('/', [BlogController::class,'index'])->name('blog.index');
+Route::get('/home', [BlogController::class,'home'])->name('blog.home');
+Route::get('/blog', [BlogController::class,'content'])->name('blog.content');
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/', [DashboardController::class,'index'])->name('dashboard.index');
@@ -21,6 +23,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     });
 
     // Roles
+    Route::get('/roles/select',[RoleController::class,'select'])->name('roles.select');
     Route::resource('/roles', RoleController::class);
     // Roles
     Route::resource('/users', UserController::class);

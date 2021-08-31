@@ -15,22 +15,24 @@
           <div class="card-header">
              <div class="row">
                 <div class="col-md-6">
-                   <form action="" method="GET">
-                      <div class="input-group">
-                         <input name="keyword" value="" type="search" class="form-control" placeholder="">
-                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit">
-                               <i class="fas fa-search"></i>
-                            </button>
-                         </div>
-                      </div>
-                   </form>
+                    <form action="{{ route('users.index') }}" method="GET">
+                        <div class="input-group">
+                           <input name="keyword" value="{{ request()->get('keyword') }}" type="search" class="form-control" placeholder="Cari Users">
+                           <div class="input-group-append">
+                              <button class="btn btn-primary" type="submit">
+                                 <i class="fas fa-search"></i>
+                              </button>
+                           </div>
+                        </div>
+                     </form>
                 </div>
                 <div class="col-md-6">
-                   <a href="{{ route('users.create') }}" class="btn btn-primary float-right" role="button">
-                      Create
-                      <i class="fas fa-plus-square"></i>
-                   </a>
+                    @can('user_create')
+                        <a href="{{ route('users.create') }}" class="btn btn-primary float-right" role="button">
+                            Create
+                            <i class="fas fa-plus-square"></i>
+                        </a>
+                    @endcan
                 </div>
              </div>
           </div>
@@ -81,16 +83,22 @@
                                  </div>
                               </div>
                               <div class="float-right">
-                                 <!-- edit -->
-                                 <a href="" class="btn btn-sm btn-info" role="button">
-                                    <i class="fas fa-edit"></i>
-                                 </a>
-                                 <!-- delete -->
-                                 <form action="" method="POST" role="alert" class="d-inline">
-                                    <button type="submit" class="btn btn-sm btn-danger">
-                                       <i class="fas fa-trash"></i>
-                                    </button>
-                                 </form>
+                                  @can('user_update')
+                                    <!-- edit -->
+                                    <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-sm btn-info" role="button">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                  @endcan
+                                  @can('user_delete')
+                                    <!-- delete -->
+                                    <form class="d-inline" action="{{ route('users.destroy',$user->id) }}" method="POST" role="alert">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm btn-sm" type="submit">
+                                            Delete
+                                        </button>
+                                    </form>
+                                  @endcan
                               </div>
                            </div>
                         </div>
@@ -111,8 +119,37 @@
           </div>
           <div class="card-footer">
              <!-- Todo:paginate -->
+             @if ($users->hasPages())
+                    <div class="card-footer">
+                        {{ $users->links('vendor.pagination.bootstrap-4') }}
+                    </div>
+             @endif
           </div>
        </div>
     </div>
 </div>
 @endsection
+
+@push('javascript-internal')
+    <script>
+        $(document).ready(function(event) {
+            $("form[role='alert']").submit(function (event) {
+            event.preventDefault();
+            Swal.fire({
+            title: "Hapus Tag",
+            text: "Yakin anda mau hapus kategori ini ?...",
+            icon: 'warning',
+            allowOutsideClick: false,
+            showCancelButton: true,
+            cancelButtonText: "Tidakkk",
+            reverseButtons: true,
+            confirmButtonText: "Iyaaa",
+            }).then((result) => {
+            if (result.isConfirmed) {
+                    event.target.submit();
+               }
+             });
+           });
+        });
+    </script>
+@endpush

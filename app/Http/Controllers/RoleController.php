@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    private $perPage = 5;
+    private $perPage = 12;
     /**
      * Display a listing of the resource.
      *
@@ -28,6 +28,15 @@ class RoleController extends Controller
         return view('admin.roles.index',[
             'roles' => $roles->appends(['keyword' => $request->keyword]),
         ]);
+    }
+
+    public function select(Request $request)
+    {
+        $roles = Role::select('id','name')->limit(7);
+        if($request->has('q')) {
+            $roles->where('name','LIKE',"%{$request->q}%");
+        }
+        return response()->json($roles->get());
     }
 
     /**
@@ -150,13 +159,10 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        // if(User::role($role->name)->count()){
-        //     Alert::warning(
-        //         trans('roles.alert.delete.title'),
-        //         trans('roles.alert.delete.message.warning', ['name' => $role->name])
-        //     );
-        //     return redirect()->back();
-        // }
+        if(User::role($role->name)->count()){
+            Alert::warning("Hapus Role Gagal", "Data masih di gunakan oleh User");
+            return redirect()->back();
+        }
         DB::beginTransaction();
         try{
             $role->revokePermissionTo($role->permissions->pluck('name')->toArray());

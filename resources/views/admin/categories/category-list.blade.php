@@ -6,19 +6,19 @@
     </label>
     <div>
       <!-- detail -->
-      {{-- @can('category_detail') --}}
+      @can('category_detail')
         <a href="{{ route('category.show', ['category' => $category]) }}" class="btn btn-sm btn-primary" role="button">
             <i class="fas fa-eye"></i>
         </a>
-      {{-- @endcan --}}
+      @endcan
       <!-- edit -->
-      {{-- @can('category_update') --}}
+      @can('category_update')
         <a href="{{ route('category.edit', ['category' => $category]) }}" class="btn btn-sm btn-info" role="button">
             <i class="fas fa-edit"></i>
         </a>
-      {{-- @endcan --}}
+      @endcan
       <!-- delete -->
-      {{-- @can('category_detail') --}}
+      @can('category_detail')
         <form class="d-inline" action="{{ route('category.destroy', ['category' => $category]) }}" role="alert" method="POST">
             @csrf
             @method('DELETE')
@@ -26,7 +26,7 @@
             <i class="fas fa-trash"></i>
             </button>
         </form>
-      {{-- @endcan --}}
+      @endcan
     </div>
     <!-- todo:show subcategory -->
     @if ($category->descendants && !trim(request()->get('keyword')))

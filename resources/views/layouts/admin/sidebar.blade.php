@@ -32,85 +32,100 @@
             </a>
           </li>
           <li class="nav-header">MANAGEMENT POST</li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Posts
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('posts.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lihat Posts</p>
+          @can('manage_posts')
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                    Posts
+                    <i class="fas fa-angle-left right"></i>
+                </p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('posts.create') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Create Posts</p>
+                <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('posts.index') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Lihat Posts</p>
+                    </a>
+                </li>
+                @can('post_create')
+                <li class="nav-item">
+                    <a href="{{ route('posts.create') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Create Posts</p>
+                    </a>
+                </li>
+                @endcan
+                </ul>
+            </li>
+          @endcan
+          @can('manage_categories')
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                <i class="nav-icon fas fa-copy"></i>
+                <p>
+                    Categories
+                    <i class="fas fa-angle-left right"></i>
+                    <span class="badge badge-info right">6</span>
+                </p>
                 </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Categories
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('category.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>List Category</p>
+                <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('category.index') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>List Category</p>
+                    </a>
+                </li>
+                @can('category_create')
+                <li class="nav-item">
+                    <a href="{{ route('category.create') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Create Category</p>
+                    </a>
+                </li>
+                @endcan
+                </ul>
+            </li>
+          @endcan
+          @can('manage_tags')
+            <li class="nav-item {{ set_active(['tags.index','tags.create']) }}">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-table"></i>
+                    <p>
+                        Tags
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('category.create') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Create Category</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item {{ set_active(['tags.index','tags.create']) }}">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Tags
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('tags.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>List Tags</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('tags.create') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Create Tags</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('tags.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>List Tags</p>
+                        </a>
+                    </li>
+                    @can('tag_create')
+                    <li class="nav-item">
+                        <a href="{{ route('tags.create') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Create Tags</p>
+                        </a>
+                    </li>
+                    @endcan
+                </ul>
+            </li>
+          @endcan
           <li class="nav-header">MANAGEMENT USERS</li>
+          @can('manage_users')
           <li class="nav-item">
-            <a href="{{ route('users.index') }}" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Users
-              </p>
-            </a>
+              <a href="{{ route('users.index') }}" class="nav-link">
+                <i class="nav-icon far fa-envelope"></i>
+                <p>
+                    Users
+                </p>
+              </a>
           </li>
+          @endcan
+          @can('manage_roles')
           <li class="nav-item">
             <a href="{{ route('roles.index') }}" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
@@ -119,6 +134,8 @@
               </p>
             </a>
           </li>
+          @endcan
+
           <li class="nav-header">MANAGEMENT FILES</li>
           <li class="nav-item">
             <a href="{{ route('filemanager.index') }}" class="nav-link">

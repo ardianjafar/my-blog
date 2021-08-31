@@ -29,13 +29,6 @@
                             </div>
                          </form>
                       </div>
-                      <div class="col-md-6">
-                          {{-- @can('category_create') --}}
-                              <a href="{{ route('category.create') }}" class="btn btn-primary float-right" role="button">Create Category
-                                  <i class="fas fa-plus-square"></i>
-                              </a>
-                          {{-- @endcan --}}
-                      </div>
                    </div>
                 </div>
                 <div class="card-body">
