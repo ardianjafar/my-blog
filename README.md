@@ -22,5 +22,8 @@
     <p> - Management Role</p>
         <p> -------> https://spatie.be/docs/laravel-permission/v4/introduction</p>
 Screenshoot
-![Login](https://user-images.githubusercontent.com/54489655/131508619-43ba863c-3ae1-477c-bdb9-3fac56eeb04e.PNG)
-![dashboard](https://user-images.githubusercontent.com/54489655/131508645-681b4a72-366f-4a40-a259-2242eea86f50.PNG)
+<h2><p>Login</p></h2>
+![Login](https://user-images.githubusercontent.com/54489655/131510329-dd145975-cd0f-45cf-9b0b-c596ca42a3d9.PNG)
+<h2><p>Dashboard</p></h2>
+![dashboard](https://user-images.githubusercontent.com/54489655/131510351-732da0bb-3a46-4201-8aff-54076724ce7b.PNG)
+
