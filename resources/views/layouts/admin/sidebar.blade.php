@@ -18,7 +18,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{ route('dashboard.index') }}" class="nav-link">
+            <a href="{{ route('dashboard.index') }}" class="nav-link {{ set_active('dashboard.index') }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -28,7 +28,7 @@
           <li class="nav-header">MANAGEMENT POST</li>
           @can('manage_posts')
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link {{ set_active(['posts.index','posts.create']) }}">
                 <i class="nav-icon fas fa-edit"></i>
                 <p>
                     Posts
@@ -55,7 +55,7 @@
           @endcan
           @can('manage_categories')
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="" class="nav-link {{ set_active(['category.index','category.index']) }}">
                 <i class="nav-icon fas fa-copy"></i>
                 <p>
                     Categories
@@ -82,8 +82,8 @@
             </li>
           @endcan
           @can('manage_tags')
-            <li class="nav-item {{ set_active(['tags.index','tags.create']) }}">
-                <a href="#" class="nav-link">
+            <li class="nav-item">
+                <a href="#" class="nav-link {{ set_active(['tags.index','tags.create']) }}">
                     <i class="nav-icon fas fa-table"></i>
                     <p>
                         Tags
@@ -112,7 +112,8 @@
           @can('manage_users')
           <li class="nav-item">
               <a href="{{ route('users.index') }}" class="nav-link">
-                <i class="nav-icon far fa-envelope"></i>
+                {{-- <i class="nav-icon far "></i> --}}
+                <i class="nav-icon fas fa-users"></i>
                 <p>
                     Users
                 </p>
@@ -122,7 +123,7 @@
           @can('manage_roles')
           <li class="nav-item">
             <a href="{{ route('roles.index') }}" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
+                <i class="nav-icon fas fa-tasks"></i>
               <p>
                 Roles
               </p>
@@ -132,8 +133,8 @@
 
           <li class="nav-header">MANAGEMENT FILES</li>
           <li class="nav-item">
-            <a href="{{ route('filemanager.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
+            <a href="{{ route('filemanager.index') }}" class="nav-link {{ set_active('filemanager.index') }}">
+              <i class="nav-icon far fa-image"></i>
               <p>
                 File
               </p>

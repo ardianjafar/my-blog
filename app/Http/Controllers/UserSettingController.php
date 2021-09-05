@@ -8,11 +8,11 @@ class UserSettingController extends Controller
 {
     public function setting()
     {
-        return "Oke";
+        // return view(''admin.se)
     }
 
     public function profile()
     {
-        return "Oke";
+        return view('admin.setting.user-profile');
     }
 }
