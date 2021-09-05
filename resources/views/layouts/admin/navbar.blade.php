@@ -4,12 +4,6 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="">
-          <a href="{{ config('app.name') }}" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Test</a>
-        </li>
     </ul>
     <!-- Left navbar links -->
 
@@ -22,9 +16,18 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('user.profile') }}">
+                    <i class="fas fa-user-circle"></i>
+                    Profile
+                </a>
+                <a class="dropdown-item" href="{{ route('user.setting') }}">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt"></i>
                     {{ __('Logout') }}
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

@@ -6,10 +6,10 @@
 @endsection
 
 @section('content')
-<div class="container">
-    @forelse ($posts as $post)
-    <div class="row">
+<div class="container py-3">
+    <div class="row mt-lg-5">
         <div class="col-lg-7 mt-2">
+            @forelse ($posts as $post)
             <div class="card">
                 <div class="card-body">
                     <div class="mb-4">
@@ -29,19 +29,18 @@
                  {{ $post->description }} <a href="">readmore...</a>
                 </p>
             </div>
+            @empty
+                No Data
+            @endforelse
         </div>
-    </div>
-    @empty
-        No Data
-    @endforelse
-    <div class="row">
+
         <div class="col-lg-4 mt-2">
             <div class="card mb-4">
                 <div class="card-header">Search</div>
                 <div class="card-body">
                     <div class="input-group">
                         <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                        <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                        <button class="btn btn-primary" id="button-search" type="button">Cari</button>
                     </div>
                 </div>
             </div>

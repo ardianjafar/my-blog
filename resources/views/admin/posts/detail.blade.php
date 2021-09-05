@@ -1,7 +1,7 @@
 @extends('layouts.admin.dashboard')
 
 @section('title')
-    {{ trans('posts.title.detail') }}
+    Detail Post
 @endsection
 
 @section('breadcrumbs')
@@ -28,26 +28,40 @@
                         </text>
                 </svg>
               @endif
+
+             <!-- categories -->
+             <div class="mt-3">
+                 <span class="text-muted">Categories : </span>
+                 @foreach ($categories as $category)
+                    <span class="badge badge-primary">{{ $category->title }}</span>
+                 @endforeach
+             </div>
+             <!-- end categories -->
+
+             <!-- tags  -->
+             <div class="mt-3">
+                 <span class="text-muted">Tags : </span>
+                 @foreach ($tags as $tag)
+                    <span class="badge badge-info"># {{ $tag->title }}</span>
+                 @endforeach
+             </div>
+             <!-- end tags -->
+
              <!-- title -->
              <h2 class="my-1">
                 {{ $post->title }}
              </h2>
+             <!-- end title -->
              <!-- description -->
              <p class="text-justify">
-                {{ $post->description }}
-             </p>
-             <!-- categories -->
-             @foreach ($categories as $category)
-                <span class="badge badge-primary">{{ $category->title }}</span>
-             @endforeach
-             <!-- content -->
+                 {{ $post->description }}
+                </p>
+            <!-- end description -->
+
              <div class="py-1">
                  {!! $post->content !!}
              </div>
-             <!-- tags  -->
-             @foreach ($tags as $tag)
-                <span class="badge badge-info"># {{ $tag->title }}</span>
-             @endforeach
+
 
              <div class="d-flex justify-content-end">
                 <a href="{{ route('posts.index') }}" class="btn btn-warning mx-1" role="button">

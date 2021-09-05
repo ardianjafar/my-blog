@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{BlogController, CategoryController,PostController,TagController,DashboardController, FileManagerController, RoleController, UserController};
+use App\Http\Controllers\{BlogController, CategoryController,PostController,TagController,DashboardController, FileManagerController, RoleController, UserController, UserSettingController};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,7 +25,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     // Roles
     Route::get('/roles/select',[RoleController::class,'select'])->name('roles.select');
     Route::resource('/roles', RoleController::class);
-    // Roles
+    // Users
     Route::resource('/users', UserController::class);
+    // Settings
+    Route::get('/settings', [UserSettingController::class,'setting'])->name('user.setting');
+    // Profile
+    Route::get('/profile', [UserSettingController::class,'profile'])->name('user.profile');
 });
 

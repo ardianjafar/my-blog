@@ -42,7 +42,7 @@
                     <tbody>
                         @foreach ($tags as $tag => $item)
                         <tr>
-                            <td>1</td>
+                            <td>*</td>
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->slug }}</td>
                             <td>{{ $item->created_at->diffForHumans() }}</td>
