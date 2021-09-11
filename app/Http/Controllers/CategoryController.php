@@ -14,7 +14,7 @@ class CategoryController extends Controller
         $this->middleware('permission:category_create',['only' => ['create','store']]);
         $this->middleware('permission:category_update',['only' => ['edit','update']]);
         $this->middleware('permission:category_detail',['only' => 'show']);
-        $this->middleware('permission:category_destroy',['only' => 'destroy']);
+        $this->middleware('permission:category_delete',['only' => 'destroy']);
     }
     /**
      * Display a listing of the resource.

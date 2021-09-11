@@ -17,7 +17,7 @@ class PostController extends Controller
         $this->middleware('permission:post_create',['only' => ['create','store']]);
         $this->middleware('permission:post_update',['only' => ['edit','update']]);
         $this->middleware('permission:post_detail',['only' => 'show']);
-        $this->middleware('permission:post_destroy',['only' => 'destroy']);
+        $this->middleware('permission:post_delete',['only' => 'destroy']);
     }
     
     /**

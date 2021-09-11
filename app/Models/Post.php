@@ -8,16 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'title',
-        'slug',
-        'thumbnail',
-        'description',
-        'content',
-        'status',
-        'user_id'
-    ];
+    protected $guarded = ['id'];
 
+    protected $with = ['author','categories'];
+    // Coba unpas
+    public function scopeFilter($query)
+    {
+        $query->when($filters['search'] ?? false, fn($query, $search) =>
+            $query->where('title','like', '%' . $search . '%')
+                  ->orWhere('body','like', '%' . $search . '%')
+            );
+
+        $query->when($filters['categories'] ?? false, fn($query, $category) =>
+            $query->whereHas('categories', fn($query)=>
+                $query->where('slug', $category)
+            )
+        );
+        
+        $query->when($filters['author'] ?? false, fn($query, $author) =>
+            $query->whereHas('author', fn($query)=>
+                $query->where('username', $author)
+            )
+        );
+    }
     public function tags()
     {
         return $this->belongsToMany(Tag::class)->withTimestamps();
@@ -40,5 +53,11 @@ class Post extends Model
     public function scopeDraft($query)
     {
         return $query->where('status', "draft");
+    }
+
+    // Author
+    public function author()
+    {
+        return $this->belongsTo(User::class,'user_id');
     }
 }

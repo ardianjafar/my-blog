@@ -18,7 +18,7 @@
         </a>
       @endcan
       <!-- delete -->
-      @can('category_detail')
+      @can('category_delete')
         <form class="d-inline" action="{{ route('category.destroy', ['category' => $category]) }}" role="alert" method="POST">
             @csrf
             @method('DELETE')

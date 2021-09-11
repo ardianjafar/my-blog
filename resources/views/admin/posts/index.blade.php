@@ -65,7 +65,7 @@
                             @forelse ($posts as $post)
                             <tbody>
                                 <tr>
-                                    <td>1</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->status }}</td>
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
@@ -137,3 +137,5 @@
         });
     </script>
 @endpush
+
+

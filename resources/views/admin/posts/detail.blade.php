@@ -1,7 +1,7 @@
 @extends('layouts.admin.dashboard')
 
 @section('title')
-    {{ trans('posts.title.detail') }}
+    Detail Posts
 @endsection
 
 @section('breadcrumbs')

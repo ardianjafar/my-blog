@@ -32,7 +32,7 @@
                     @if (count($tags))
                     <thead>
                       <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>Tags</th>
                         <th>Slug</th>
                         <th>Created at</th>
@@ -42,7 +42,7 @@
                     <tbody>
                         @foreach ($tags as $tag => $item)
                         <tr>
-                            <td>1</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->slug }}</td>
                             <td>{{ $item->created_at->diffForHumans() }}</td>

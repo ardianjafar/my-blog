@@ -8,6 +8,7 @@
                 <li class="nav-item"><a class="nav-link {{ set_active('blog.about') }}" href="#!">About</a></li>
                 <li class="nav-item"><a class="nav-link {{ set_active('blog.contact') }}" href="#!">Contact</a></li>
                 <li class="nav-item"><a class="nav-link {{ set_active('blog.content') }}" aria-current="page" href="{{ route('blog.content') }}">Blog</a></li>
+                <li class="nav-item"><a class="nav-link {{ set_active('blog.category') }}" aria-current="page" href="{{ route('blog.category') }}">Category</a></li>
             </ul>
         </div>
     </div>

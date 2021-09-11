@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-
 class PostFactory extends Factory
 {
     /**
@@ -24,13 +23,16 @@ class PostFactory extends Factory
     {
         return [
             'title'         => 'ini adalah title',
-            'slug'          => 'u' . strtolower(Str::random(10)),
-            'thumbnail'     => 'default.jpg',
-            'description'   => 'Model factory sendiri umumnya digunakan untuk testing dan seeder. Tentunya, data yang dimasukkan merupakan data palsu yang bersumber dari librari Faker.',
-            'content'       => 'Sebagai bahan percobaan, kita akan membuat model factory untuk model Blog. Ada beberapa langkah yang harus dilakukan sebelum Model Factory siap digunakan, mulai dari membuat migration untuk tabel blog, membuat model factory untuk blog itu sendiri, kemudian menggunakan Model Factory dalam Seeder.<p>Sebagai bahan percobaan, kita akan membuat model factory untuk model Blog. Ada beberapa langkah yang harus dilakukan sebelum Model Factory siap digunakan, mulai dari membuat migration untuk tabel blog, membuat model factory untuk blog itu sendiri, kemudian menggunakan Model Factory dalam Seeder.</p>Sebagai bahan percobaan, kita akan membuat model factory untuk model Blog. Ada beberapa langkah yang harus dilakukan sebelum Model Factory siap digunakan, mulai dari membuat migration untuk tabel blog, membuat model factory untuk blog itu sendiri, kemudian menggunakan Model Factory dalam Seeder.',
+            'slug'          => '',
+            'thumbnail'     => 'storage/photos/1/1.jpg',
+            'description'   => $this->faker->paragraph(5,10),
+            'content'       => collect($this->faker->paragraphs(mt_rand(5,10)))
+                                ->map(function ($p){
+                                    return "<p>$p</p>";
+                                })->implode(''),
             'created_at'    => date('Y-m-d H:i:s'),
             'updated_at'    => date('Y-m-d H:i:s'),
-            'user_id'       => 1
+            'user_id'       => mt_rand(1,4)
         ];
     }
 }
