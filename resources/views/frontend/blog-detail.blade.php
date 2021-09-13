@@ -1,4 +1,4 @@
-@extends('layouts.frontend.app')
+@extends('layouts.frontend.fix')
 
 
 @section('title')
@@ -6,12 +6,12 @@
 @endsection
 
 @section('content')
-    <br><br>
-    <div class="container">
+    <div class="container mb-5">
+        <br><br><br><br>
         <div class="row">
             <div class="col-lg-8">
                 @if(file_exists(public_path($post->thumbnail)))
-                        <img class="card-img-top" src="{{ asset($post->thumbnail) }}" alt="{{ $post->title }}">
+                        <img class="card-img-top" src="{{ asset($post->thumbnail) }}" alt="{{ $post->title }}" style="width: 750px">
                 @else
                         <img class="img-fluid rounded" src="http://placehold.it/750x300" alt="{{ $post->title }}">
                 @endif
@@ -25,43 +25,63 @@
                     {!! $post->content  !!}
                 </div>
             </div>
-            <!-- Sidebar Widgets Column:start -->
             <div class="col-md-4">
-                <!-- Categories Widget -->
-                <div class="card mb-3">
-                    <h5 class="card-header">
-                        Categories
-                    </h5>
-                <div class="card-body">
-                    <!-- category list:start -->
-                    @foreach ($post->categories as $category)
-                        <a href="{{  }}" class="badge bg-primary py-2 px-4 my-1 text-decoration-none text-white">
-                            {{ $category->title }}
-                        </a>
-                    @endforeach
+                <div class="card card-member">
+                    <div class="content">
+                        <div class="description">
+                            <div class="button-get-started">
+                                <a href="#gaia" class="btn btn-danger btn-fill btn-lg">Category</a>
+                            </div>
+                            <div class="">
+                                @foreach ($post->categories as $category)
+                                    <a href="#gaia" class="btn btn-primary btn-fill btn-sm">{{ $category->title }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- category list:end -->
-
-            </div>
-            <!-- Side Widget tags:start -->
-            <div class="card mb-3">
-                <h5 class="card-header">
-                    Post Tags
-                </h5>
-                <div class="card-body">
-                    <!-- tag list:start -->
-                    @foreach ($post->tags as $tag)
-                        <a href="" class="badge bg-info py-2 px-4 my-1 text-decoration-none">
-                            #{{ $tag->title }}
-                        </a>
-                    @endforeach
-                    <!-- tag list:end -->
-                </div>
-                </div>
-                <!-- Side Widget tags:start -->
-            </div>
-            <!-- Sidebar Widgets Column:end -->
+            </div> 
             
-        </div>   
+            <div class="col-md-4">
+                <div class="card card-member">
+                    <div class="content">
+                        <div class="description">
+                            <div class="button-get-started">
+                                <a href="#gaia" class="btn btn-danger btn-fill btn-lg">Tags</a>
+                            </div>
+                            <div class="">
+                                @foreach ($post->tags as $tag)
+                                    <a href="#gaia" class="btn btn-primary btn-fill btn-sm">{{ $tag->title }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br> 
     </div>
 @endsection
+
+@push('css-external')
+    <link href="/css/app.css" rel="stylesheet" />
+    <link href="/css/gaia.css" rel="stylesheet"/>
+    <!--     Fonts and icons     -->
+    <link href='https://fonts.googleapis.com/css?family=Cambo|Poppins:400,600' rel='stylesheet' type='text/css'>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+@endpush
+
+@push('js-external')
+        <!--   core js files    -->
+        <script src="/js/jquery.min.js" type="text/javascript"></script>
+        <script src="/js/bootstrap.js" type="text/javascript"></script>
+    
+        <!--  js library for devices recognition -->
+        <script type="text/javascript" src="/js/modernizr.js"></script>
+    
+        <!--  script for google maps   -->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    
+        <!--   file where we handle all the script from the Gaia - Bootstrap Template   -->
+        <script type="text/javascript" src="/js/gaia.js"></script>
+@endpush

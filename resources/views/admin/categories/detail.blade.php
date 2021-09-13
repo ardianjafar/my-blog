@@ -15,8 +15,8 @@
             <div class="card-body">
                 {{-- {{ dd(asset($categories->thumbnail)) }} --}}
                 @if (file_exists(public_path($category->thumbnail)))
-                <div class="">
-                    <img src="{{ asset($category->thumbnail) }}" alt="{{ $category->title }}" >
+                <div class="text-center">
+                    <img src="{{ asset($category->thumbnail) }}" alt="{{ $category->title }}" style="height: 450px; width:750px;">
                 </div>
                 @else
                     <!-- thumbnail:false -->

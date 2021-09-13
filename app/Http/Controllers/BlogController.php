@@ -7,16 +7,15 @@ use App\Models\{Post,Category,Tag, User};
 
 class BlogController extends Controller
 {
+    private $perPage = 15;
+
     public function index()
     {
-        return "Oke";
+        return view('frontend.home');
     }
 
     public function content()
     {
-
-        // dd(Post::publish()->latest()->filter(request(['search','categories','author']))->paginate(15)->withQueryString());
-        // return Post::publish()->latest()->filter(request(['search','categories','author']))->paginate(15)->withQueryString();
         $title = '';
         if(request('category')){
             $category = Category::firstWhere('slug', request('category'));
@@ -29,19 +28,16 @@ class BlogController extends Controller
         }
         return view('frontend.blog-content',[
             'title'     => "Cari Postingan" . $title,
-            // 'posts' => Post::publish()->latest()->filter(request(['search','categories','author']))->where('categories')->get(),
-            'posts' => Post::publish()->latest()->paginate(15)
+            'posts' => Post::publish()->latest()->paginate($this->perPage)
         ]);
     }
 
     public function detail($slug)
     {
         $post = Post::publish()->where('slug', $slug)->first();
-        // $posts = Post::where('category_id', $post->category_id)->latest()->limit(10)->get();
         if(!$post){
             return redirect()->route('blog.content');
         }
-
         return view('frontend.blog-detail',[
             'post'  => $post,
         ]);
@@ -49,10 +45,26 @@ class BlogController extends Controller
 
     }
 
+    public function showPostByCategory($slug)
+    {
+        $posts = Post::publish()->whereHas('categories',function($query)use ($slug){
+            return $query->where('slug', $slug);
+        })->paginate($this->perPage);
+
+
+        $category = Category::where('slug', $slug)->first();
+        $categoryRoot =  $category->root();
+        return view('frontend.blog-categorypost',[
+            'posts' => $posts,
+            'category'  => $category,
+            'categoryRoot' => $categoryRoot,
+        ]);
+    }
+
     public function category()
     {
         return view('frontend.blog-category',[
-            'categories'    => Category::onlyParent()->paginate(10)
+            'categories'    => Category::onlyParent()->paginate($this->perPage)
         ]);
     }
 

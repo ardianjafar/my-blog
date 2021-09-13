@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 Route::get('/', [BlogController::class,'index'])->name('blog.index');
-Route::get('/home', [BlogController::class,'home'])->name('blog.home');
 Route::get('/blog', [BlogController::class,'content'])->name('blog.content');
 Route::get('/blog/{slug}', [BlogController::class,'detail'])->name('blog.detail');
 Route::get('/blog/author', [BlogController::class,'authors'])->name('blog.authors');
 Route::get('/category', [BlogController::class,'category'])->name('blog.category');
+Route::get('/category/{slug}', [BlogController::class,'showPostByCategory'])->name('blog.posts.category');
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function(){
     Route::get('/', [DashboardController::class,'index'])->name('dashboard.index');
