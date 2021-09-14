@@ -4,7 +4,7 @@
 @section('login-page')
 <div class="login-box">
     <div class="login-logo">
-      <a href="../../index2.html"><b>MyBlog</b> App</a>
+      <a href="../../index2.html"><b>As-syuruq</b> App</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">

@@ -62,7 +62,7 @@
                                     <th>Option</th>
                                 </tr>
                             </thead>
-                            @forelse ($posts as $post)
+                            @forelse ($posts as $post => $result)
                             <tbody>
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
@@ -72,13 +72,13 @@
                                     <td>Manyan</td>
                                     <td class="d-flex">
                                         @can('post_detail')
-                                            <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info btn-sm mx-1">Detail</a>
+                                            <a href="{{ route('posts.show', $result->id) }}" class="btn btn-info btn-sm mx-1">Detail</a>
                                         @endcan
                                         @can('post_update')
-                                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary btn-sm mx-1">Edit</a>
+                                            <a href="{{ route('posts.edit', $result->id) }}" class="btn btn-primary btn-sm mx-1">Edit</a>
                                         @endcan
                                         @can('post_delete')
-                                            <form action="{{ route('posts.destroy', ['post' => $post]) }}" method="post" role="alert">
+                                            <form action="{{ route('posts.destroy', ['post' => $result]) }}" method="post" role="alert">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger btn-sm">
@@ -95,7 +95,7 @@
                                     @if (request()->get('keyword'))
                                         Data  pencarian <strong>{{ request()->get('keyword') }}</strong> belum ada dalam postingan
                                     @else
-                                        <strong>Data Post Belum Ada</strong>
+                                        <strong>Data Post Draft Belum Ada</strong>
                                     @endif
                                 </p>
                             </div>

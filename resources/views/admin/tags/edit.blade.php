@@ -15,7 +15,7 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form action="{{ route('tags.store', ['tag' => $tag]) }}" method="POST">
+    <form action="{{ route('tags.update', ['tag' => $tag]) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="card-body">
