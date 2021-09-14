@@ -76,7 +76,7 @@
                                           <td>:</td>
                                           <td>
                                              <!-- Show user roles -->
-                                             {{ $user->roles->first()->name }}
+                                             {{ $user->roles->first()->name ?? '-- Unset --' }}
                                           </td>
                                        </tr>
                                     </table>

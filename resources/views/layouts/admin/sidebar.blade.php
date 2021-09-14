@@ -25,8 +25,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">MANAGEMENT POST</li>
           @can('manage_posts')
+          <li class="nav-header">MANAGEMENT POST</li>
             <li class="nav-item">
                 <a href="#" class="nav-link {{ set_active(['posts.index','posts.create']) }}">
                 <i class="nav-icon fas fa-edit"></i>
@@ -60,7 +60,6 @@
                 <p>
                     Categories
                     <i class="fas fa-angle-left right"></i>
-                    <span class="badge badge-info right">6</span>
                 </p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -108,8 +107,8 @@
                 </ul>
             </li>
           @endcan
-          <li class="nav-header">MANAGEMENT USERS</li>
           @can('manage_users')
+          <li class="nav-header">MANAGEMENT USERS</li>
           <li class="nav-item">
               <a href="{{ route('users.index') }}" class="nav-link">
                 {{-- <i class="nav-icon far "></i> --}}
@@ -129,7 +128,7 @@
               </p>
             </a>
           </li>
-          @endcan
+          
 
           <li class="nav-header">MANAGEMENT FILES</li>
           <li class="nav-item">
@@ -140,6 +139,7 @@
               </p>
             </a>
           </li>
+          @endcan
       </nav>
       <!-- /.sidebar-menu -->
     </div>

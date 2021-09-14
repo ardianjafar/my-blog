@@ -54,7 +54,7 @@ class BlogController extends Controller
 
         $category = Category::where('slug', $slug)->first();
         $categoryRoot =  $category->root();
-        return view('frontend.blog-categorypost',[
+        return view('frontend.blog-category-bypost',[
             'posts' => $posts,
             'category'  => $category,
             'categoryRoot' => $categoryRoot,

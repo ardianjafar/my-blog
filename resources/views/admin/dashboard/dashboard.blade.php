@@ -31,45 +31,22 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Tags</th>
-                        <th>Slug</th>
-                        <th>Created at</th>
+                        <th>title</th>
+                        <th>created at</th>
+                        <th>create by</th>
                         <th>Views</th>
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Trident</td>
-                        <td>windows-11
-                        </td>
-                        <td>Win 95+</td>
-                        <td> 4</td>
-                        <td>
-                            <form action="" method="post">
-                                <a href="" class="btn btn-danger btn-sm">Delete</a>
-                                <a href="" class="btn btn-info btn-sm">Detail</a>
-                                <a href="" class="btn btn-primary btn-sm">Edit</a>
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Trident</td>
-                        <td>Internet
-                        Explorer 4.0
-                        </td>
-                        <td>Win 2001</td>
-                        <td> 8</td>
-                        <td>
-                            <form action="" method="post">
-                                <a href="" class="btn btn-danger btn-sm">Delete</a>
-                                <a href="" class="btn btn-info btn-sm">Detail</a>
-                                <a href="" class="btn btn-primary btn-sm">Edit</a>
-                            </form>
-                        </td>
-                    </tr>
+                      @foreach ($posts as $post)    
+                        <tr>
+                          <td>{{ $loop->iteration }}</td>
+                          <td class="text-lowercase">{{ $post->title }}</td>
+                          <td>{{ $post->created_at }}</td>
+                          <td>Win 95+</td>
+                          <td> 4</td>
+                        </tr>
+                      @endforeach
                     </tbody>
                   </table>
                 </div>

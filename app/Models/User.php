@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $query->where('name', 'LIKE', "%{$name}%");
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

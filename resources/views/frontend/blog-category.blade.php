@@ -6,44 +6,57 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            @forelse ($categories as $category)    
-                <div class="col-lg-4 col-sm-6 portfolio-item mb-3">
-                    <div class="card">
-                        @if (file_exists(public_path($category->thumbnail)))
-                            <img src="{{ asset($category->thumbnail) }}" alt="{{ $category->title }}" class="card-img-top" >
-                        @else 
-                            <a href="/posts?category={{ $category->slug }}">
-                                <div class="bg-dark text-white">
-                                    <img src="https://source.unsplash.com/500x500?{{ $category->slug }}" class="card-img" alt="{{ $category->slug }}">
-                                    <div class="card-img-overlay d-flex align-items-center p-0">
-                                        <h5 class="card-title text-center flex-fill p-4 fs-3" style="background-color: rgba(0,0,0,0.7)">{{ $category->slug }}</h5>
+<div class="container">
+    <br><br><br><br>
+    <div class="content">
+        <div class="team">
+            <div class="row py-5">
+                <div class="col-md-12">
+                    <div class="row">
+                        @forelse ($categories as $category)
+                        <div class="col-md-4">
+                            <div class="card card-member">
+                                <div class="content">
+                                    <div class="avatart avatar-danger">
+                                        @if (file_exists(public_path($category->thumbnail)))
+                                            <img src="{{ asset($category->thumbnail) }}" alt="{{ $category->title }}" class="card-img-top" >
+                                        @else 
+                                            <a href="/posts?category={{ $category->slug }}">
+                                                <div class="bg-dark text-white">
+                                                    <img src="https://source.unsplash.com/500x500?{{ $category->slug }}" class="card-img" alt="{{ $category->slug }}">
+                                                    <div class="card-img-overlay d-flex align-items-center p-0">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        @endif
+                                    </div>
+                                    <div class="description">
+                                        <p class="card-text fs-2">
+                                            <a href="{{ route('blog.posts.category', ['slug' => $category->slug]) }}"
+                                                class="text-decoration-none">
+                                                <h3>
+                                                    {{ $category->title }}
+                                                </h3>
+                                            </a>
+                                        </p>
+                                        <p class="card-text">
+                                            {{ $category->description }}
+                                        </p>
                                     </div>
                                 </div>
-                            </a>
-                        @endif
-                        <div class="card-body">
-                            <h6>Title</h6>
-                            <p class="card-text fs-2">
-                                <a href="{{ route('blog.posts.category', ['slug' => $category->slug]) }}"
-                                    class="text-decoration-none">
-                                    {{ $category->title }}
-                                </a>
-                            </p>
-                            <p class="card-text">
-                                {{ $category->description }}
-                            </p>
+                            </div>
                         </div>
+                        @empty
+                        <h3 class="text-center">
+                            No data
+                        </h3>
+                        @endforelse
                     </div>
                 </div>
-            @empty
-            <h3 class="text-center">
-                No data
-            </h3>
-            @endforelse
-        </div>   
+            </div>
+        </div>
     </div>
+</div>
 @endsection
 
 @push('css-external')

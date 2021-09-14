@@ -63,13 +63,13 @@
                                 </tr>
                             </thead>
                             @forelse ($posts as $post => $result)
-                            <tbody>
+                           <tbody>
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $post->title }}</td>
-                                    <td>{{ $post->status }}</td>
-                                    <td>{{ $post->created_at->diffForHumans() }}</td>
-                                    <td>Manyan</td>
+                                    <td>{{ $result->title }}</td>
+                                    <td>{{ $result->status }}</td>
+                                    <td>{{ $result->created_at->diffForHumans() }}</td>
+                                    <td>{{ $result->author->name }}</td>
                                     <td class="d-flex">
                                         @can('post_detail')
                                             <a href="{{ route('posts.show', $result->id) }}" class="btn btn-info btn-sm mx-1">Detail</a>

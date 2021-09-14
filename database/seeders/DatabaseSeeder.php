@@ -13,13 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        \App\Models\Post::factory(100)->create();
+        \App\Models\User::factory(10)->create();
+        // \App\Models\Post::factory(100)->create();
 
-        // $this->call([
-        //     CategorySeeder::class,
-        //     TagSeeder::class,
-        //     PermissionTableSeeder::class
-        // ]);
+        $this->call([
+            CategorySeeder::class,
+            TagSeeder::class,
+            PermissionTableSeeder::class
+        ]);
     }
 }

@@ -8,7 +8,7 @@
                 <span class="icon-bar bar2"></span>
                 <span class="icon-bar bar3"></span>
             </button>
-            <a href="#" class="navbar-brand">
+            <a href="{{ route('blog.index') }}" class="navbar-brand">
                 As-SyuruqTv
             </a>
         </div>

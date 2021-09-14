@@ -17,6 +17,18 @@
                 @csrf
                 <!-- name -->
                 <div class="form-group">
+                    <label for="input_username" class="font-weight-bold">
+                       Username
+                    </label>
+                    <input id="input_username" value="{{ old('username') }}" name="username" type="text" class="form-control @error('username') is-invalid @enderror" placeholder="Masukkan Nama" />
+                    <!-- error message -->
+                     @error('username')
+                         <span class="invalid-feedback">
+                             {{ $message }}
+                         </span>
+                     @enderror
+                 </div>
+                <div class="form-group">
                    <label for="input_user_name" class="font-weight-bold">
                       Name
                    </label>

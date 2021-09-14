@@ -28,6 +28,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        // $coba = \App\Models\User::first()->roles;
+        // dd($coba);
         $user = [];
         if($request->has('keyword')){
             $user = User::search($request->keyword)->paginate($this->perPage);
@@ -57,9 +59,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make(
             $request->all(),
             [
+                'username'  => ['required','string','max:25','min:3'],
                 'name'      => ['required','string','max:30'],
                 'role'      => ['required'],
                 'email'     => ['required','email','unique:users,email'],
@@ -77,6 +81,7 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             $user = User::create([
+                'username'  => $request->username,
                 'name'      => $request->name,
                 'email'      => $request->email,
                 'password'      => Hash::make($request->password),
