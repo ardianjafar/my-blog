@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 Route::get('/', [BlogController::class,'index'])->name('blog.index');
+Route::get('/about',[BlogController::class,'about'])->name('about');
 Route::get('/blog', [BlogController::class,'content'])->name('blog.content');
 Route::get('/blog/{slug}', [BlogController::class,'detail'])->name('blog.detail');
 Route::get('/blog/author', [BlogController::class,'authors'])->name('blog.authors');
