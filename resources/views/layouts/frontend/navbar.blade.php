@@ -18,10 +18,10 @@
                     <a href="{{ route('blog.index') }}">Home</a>
                 </li>
                 <li>
-                    <a href="#">About</a>
+                    <a href="#about">About</a>
                 </li>
                 <li>
-                    <a href="#">Contact</a>
+                    <a href="#contact">Contact</a>
                 </li>
                 <li>
                     <a href="{{ route('blog.content') }}">Blog</a>

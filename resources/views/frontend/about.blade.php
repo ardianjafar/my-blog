@@ -1,37 +1,38 @@
-@extends('layouts.frontend.fix')
+{{-- @extends('layouts.frontend.fix')
 
 @section('title')
-    Home
+    About
 @endsection
 
 @section('content')
-<div class="section section-header">
-    <div class="parallax filter filter-color-red">
-        <div class="image"
-            style="background-image: url('/img/palestine.png')">
-        </div>
-        <div class="container">
-            <div class="content">
-                <div class="title-area">
-                    <p>Lembaga Dakwah</p>
-                    <h1 class="title-modern">As-SyuruqTv</h1>
-                    <h3>Lembaga Dakwah dan Berita Islami</h2>
-                    <div class="separator line-separator">♦</div>
-                </div>
+<div class="container mt-5">
+    <div class="py-5">
+        <h1>Hello World</h1>
+        <p>
+            As Syuruq adalah media dakwah yang berwawasan ahlus sunah wal jamaah dengan dewan asatidz yaitu Gus Ibrohim Himzi Putra dari KH Abdurrochim Syadzily, Ust Baharudin Baaziz Pengajar Di Pondok Pesantren Dar Al Hikmah Singosari, Al Habib Taufiq Baraqbah Pengasuh Yayasan Taufiq Baraqbah, Al Habib Muhammad Tsani Assegaf Menantu Al Habib Abdurrahman Baraqbah, Al Ustadz Novi Khodimul Majelis Riyadlul Jannah Ciliwung, Abah H Imam Mulyadi Pengasuh Pesantren Al Muhajirin Bahrul Maghfiroh.
+        </p>
+        <p>
+            As Syuruq terbentuk karena merasa prihatin dengan sedikitnya para pejuang dakwah yang ber ahlussunah wal jamaah di media sosial sehingga terbentuklah As Syuruq Media sebagai wadah untuk belajar dan berdakwah melalui media sosial.
+        </p>
+        <p>
 
-                <div class="button-get-started">
-                    <a href="#about" class="btn btn-white btn-fill btn-lg ">
-                        Tentang Kami
-                    </a>
-                </div>
-            </div>
-
-        </div>
+        Harapan para asatidz setelah mendapatkan bekal untuk berdakwah melalui media di As Syuruq dapat berkembang menciptakan media dakwah lagi dan mengajak banyak orang lain untuk belajar dakwah sehingga semakin banyak orang yang berdakwah sesuai ajaran ahlussunah wal jamaah
+        </p>
     </div>
 </div>
+@endsection --}}
 
+@extends('layouts.frontend.fix')
 
-<div class="section" id="about">
+@section('title')
+    About
+@endsection
+
+@section('content')
+<br>
+<br>
+<br>
+<div class="section">
     <div class="container">
         <div class="row">
             <div class="title-area">
@@ -284,13 +285,13 @@
                 </p> --}}
             </div>
 
-        </div>
+        </div> --}}
 
     </div>
 </div>
 
 
-<div class="section section-small section-get-started" id="contact">
+<div class="section section-small section-get-started">
     <div class="parallax filter">
         <div class="image"
             style="background-image: url('/img/office-1.jpeg')">
@@ -309,6 +310,7 @@
     </div>
 </div>
 @endsection
+
 @push('css-external')
     <link href="/css/app.css" rel="stylesheet" />
     <link href="/css/gaia.css" rel="stylesheet"/>

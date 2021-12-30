@@ -72,4 +72,8 @@ class BlogController extends Controller
     {
         # code...
     }
+
+    public function about(){
+        return view('frontend.about');
+    }
 }
